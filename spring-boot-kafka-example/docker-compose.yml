@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  kafka-ui:
+    hostname: kafka-ui
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - 8080:8080
+    volumes:
+      - ./cert:/opt/cert
+    environment:
+      KAFKA_CLUSTERS_0_NAME: my_kafka
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "servers"
+      KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SSL
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_LOCATION: /opt/cert/keystore.jks
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_PASSWORD: PASSWORD
+      KAFKA_CLUSTERS_0_PROPERTIES_SSL_KEYSTORE_TYPE: JKS
+#      KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_LOCATION: /opt/cert/keystore.jks
+#      KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_PASSWORD: PASSWORD
+#      KAFKA_CLUSTERS_0_PROPERTIES_SSL_TRUSTSTORE_TYPE: JKS

@@ -13,6 +13,6 @@ public class KafkaMessageFilter implements RecordFilterStrategy<String, String> 
                 header -> {
 
                 });
-        return true;
+        return false;
     }
 }

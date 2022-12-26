@@ -1,7 +1,6 @@
 package com.springbootkafkaexample.services;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -13,13 +12,16 @@ import java.util.List;
 @Component
 public class KafkaConsumer {
 
-    @Value("${kafkaTopic}")
-    String topic;
-
     //    @KafkaListener(topics = "#{'${kafkaTopic}'.split(',')}", groupId = "group_id")
     @KafkaListener(topics = "${kafkaTopic}")
-    public void receiveMessage(@Payload List<String> messages, Acknowledgment ack) {
-        System.out.println("---->" + messages);
+//    @KafkaListener(topics = "#{'${KafkaTopic}'.split(',')}")
+    public void consumer(@Payload List<String> messages, Acknowledgment ack) {
+        log.info("Message Received of size ----> " + messages.size());
+        for (String msg : messages) {
+            log.info("-----> " + msg);
+        }
+        log.info("------------------------------------");
+        ack.acknowledge();
     }
 
 }

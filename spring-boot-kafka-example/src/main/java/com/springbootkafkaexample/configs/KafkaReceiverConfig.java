@@ -36,7 +36,7 @@ public class KafkaReceiverConfig {
     private String bootstrapServers;
     @Value("${kafka.offset}")
     private String kafkaOffset;
-    @Value("${MaxPollSizeKafka:1}")
+    @Value("${MaxPollSizeKafka:5}")
     private int maxPollRecordsSize;
     @Value("${kafka.max.poll.interval.ms}")
     private int maxPollInterval;
@@ -66,8 +66,8 @@ public class KafkaReceiverConfig {
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         if (sslConfig.isSslEnabled()) {
             props.put(SECURITY_PROTOCOL_CONFIG, KafkaSSLConfig.SECURITY_PROTOCOL_SSL);
-            props.put(SSL_KEYSTORE_PASSWORD_CONFIG, sslConfig.getKeyStorePassword());
             props.put(SSL_KEYSTORE_LOCATION_CONFIG, sslConfig.getKeyStoreLocation());
+            props.put(SSL_KEYSTORE_PASSWORD_CONFIG, sslConfig.getKeyStorePassword());
         }
         return props;
     }

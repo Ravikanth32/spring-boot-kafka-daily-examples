@@ -10,7 +10,7 @@ public class CodeSanitizer {
     private static String cleanUp(String value) {
         String result;
         String finalResult;
-        if (value != null && !((String) value).isEmpty()) {
+        if (value != null && !value.isEmpty()) {
             result = Jsoup.clean(value, Whitelist.basic());
             finalResult = Parser.unescapeEntities(result, true);
         } else {
@@ -23,7 +23,7 @@ public class CodeSanitizer {
 
     public static Long cleanUpLong(Long param) {
         String result;
-        Long finalResult = new Long(0L);
+        Long finalResult = Long.valueOf(0L);
         if (param != null) {
             result = String.valueOf(param);
             result = cleanUp(result);
